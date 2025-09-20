@@ -1,8 +1,18 @@
 # Rehosts
 
+forked from ([bitrate16/rehosts](https://github.com/bitrate16/rehosts))
+
 CoreDNS hosts-like records plugin with support of regular expressions matching. Based on [hosts plugin](https://github.com/coredns/coredns/tree/master/plugin/hosts) functionality and extended with regexp.
 
-# Install
+# Prep 'plugin.cfg'
+
+Run the script in CoreDNS main directory
+
+```bash
+ bash <(curl -s curl https://raw.githubusercontent.com/eli-github/rehosts/master/add_reauto_to_plugins.sh)
+```
+
+# Manual Install
 
 Add this plugin to (`plugin.cfg` in coredns source)[https://github.com/coredns/coredns/blob/master/plugin.cfg]:
 ```
