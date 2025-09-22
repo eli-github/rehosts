@@ -12,6 +12,12 @@ Run the script in CoreDNS main directory
  bash <(curl -s curl https://raw.githubusercontent.com/eli-github/rehosts/master/add_reauto_to_plugins.sh)
 ```
 
+Occasionally the following command is required to be run, I'm not sure why at the moment
+
+```google
+ go get github.com/eli-github/rehosts
+```
+
 # Manual Install
 
 Add this plugin to (`plugin.cfg` in coredns source)[https://github.com/coredns/coredns/blob/master/plugin.cfg]:
