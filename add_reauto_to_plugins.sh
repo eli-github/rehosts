@@ -3,7 +3,7 @@
 # This script checks and updates the plugin.cfg file.
 
 FILE="plugin.cfg"
-LINE_TO_CHECK="rehosts:github.com/eli-github/rehosts"
+LINE_TO_CHECK="rehosts:github.com/eli-github/rehosts/plugin"
 LINE_TO_INSERT_BEFORE="hosts:hosts"
 
 # ---
