@@ -21,7 +21,7 @@
 #           # Add your build, test, and release commands here
 
 
-name: Release
+name: Build and Release version from CoreDNS repo
 
 on:
   workflow_dispatch:
@@ -59,8 +59,7 @@ jobs:
       - name: Checkout CoreDNS
         uses: actions/checkout@v5
         with:
-          repository: 'eli-github/coredns'
-          # repository: 'coredns/coredns'
+          repository: 'coredns/coredns'
           ref: ${{ github.event.inputs.commit }}
 
       - name: Patch plugin.cfg
