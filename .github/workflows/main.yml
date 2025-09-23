@@ -1,9 +1,36 @@
-name: CI
-on: [push]
+name: Build and Release Go Binary
+
+on:
+  push:
+    tags:
+      - act-*
+    # tags-ignore:
+    #   - v*-alpha
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+      # - name: Checkout
+      #   uses: actions/checkout@v5
+      - name: Checkout CoreDNS
+        uses: actions/checkout@v5
+        with:
+          repository: 'coredns/coredns'
+          ref: 'v1.12.4'
+
+      - name: Build
+        run: |
+          echo ${{ github.sha }} > Release.txt
+      - name: Test
+        run: cat Release.txt
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        # if: github.ref_type == 'tag'
+        with:
+          name: pub Name
+          tag_name: "v0.0.0"
+
+          files: |
+            Release.txt
+            LICENSE
