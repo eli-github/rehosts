@@ -98,12 +98,12 @@ jobs:
           echo ${{ steps.info.outputs.version }}
           # cat release.md
           sha256sum release/*.tgz
-      - name: Draft release
+      - name: Publish release
         uses: softprops/action-gh-release@6cbd405e2c4e67a21c47fa9e383d020e4e28b836  # v2.3.3
         with:
           body_path: release.md
           name: v${{ steps.info.outputs.version }}
-          tag_name: v${{ steps.info.outputs.version }}
+          tag_name: v${{ steps.info.outputs.version }}-from-coredns
           # target_commitish: ${{ steps.info.outputs.commit }}
           repository: eli-github/rehosts
           files: |
