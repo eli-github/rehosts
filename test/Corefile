@@ -1,0 +1,93 @@
+.:1053 {
+    forward . 8.8.8.8:53
+    reload
+    log
+}
+
+.:1054 {
+    forward . 1.1.1.1:53
+    log
+}
+
+
+https://example.com:1055 {
+
+    tls cert.pem key.pem
+    whoami
+    log
+}
+
+.:1056 {
+    reload
+
+    rehosts ./test.rehosts.hosts {
+        ttl 3600
+        reload 6s
+        fallthrough
+    }
+
+    forward . 1.1.1.1
+
+    log
+    errors
+    debug
+}
+
+tls://.:1057 {
+
+    tls cert.pem key.pem
+    reload
+
+    rehosts ./test.rehosts.hosts {
+        ttl 3600
+        reload 6s
+        fallthrough
+    }
+
+    forward . 1.1.1.1
+
+    log
+    errors
+    debug
+}
+
+quic://.:1058 {
+    reload
+
+    tls cert.pem key.pem
+    quic
+    
+    rehosts ./test.rehosts.hosts {
+        ttl 3600
+        reload 6s
+        fallthrough
+    }
+
+    forward . tls://1.1.1.1 tls://1.0.0.1 {
+       tls_servername cloudflare-dns.com
+       health_check 5s
+    }
+
+    cache 30
+    log
+    errors
+    debug
+}
+
+tls://.:1059 https://.:1060 quic://.:1061 {
+    reload
+
+    tls cert.pem key.pem
+    quic
+    rehosts ./test.rehosts.hosts {
+        ttl 3600
+        reload 6s
+        fallthrough
+    }
+
+    forward . 1.1.1.1
+
+    log
+    errors
+    debug
+}

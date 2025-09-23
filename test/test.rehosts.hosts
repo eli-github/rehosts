@@ -1,0 +1,25 @@
+
+# This is your hosts:
+127.0.0.1 google.com
+
+
+# This is your hosts on drugs:
+
+# Regular, fully backwards-compatible with hosts
+127.0.1.1 google.com
+127.0.1.2 google.uk google.eu
+
+# Wildcard or something. idk, I use cash
+127.0.0.2 *.google.com
+127.0.0.3 *.bing.com *.bing.cn
+127.0.0.4 *.yeet.* yeet.*
+
+# regex, silly
+127.0.0.3 @ ([a-n]+\.)?g?oogle\.(com|eu)
+
+# unicode too
+127.0.0.4 бебро.ед
+
+$ Block list
+127.0.0.11 @ .*ttt.*
+
