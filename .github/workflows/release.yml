@@ -27,8 +27,17 @@ on:
   workflow_dispatch:
     inputs:
       commit:
-        description: "Commit (e.g., 52f0348)"
-        default: "master"
+        description: "Tag from CoreDNS (e.g., v1.0.0)"
+        default: "1.12.4"
+
+
+
+# on:
+#   push:
+#     tags:
+#       - v*
+#     tags-ignore:
+#       - v*-alpha
 
 permissions:
   contents: read
@@ -47,16 +56,12 @@ jobs:
         with:
           go-version: '1.25.1'
 
-      # - name: Check out code
-      #   uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
-      #   with:
-      #     ref: ${{ github.event.inputs.commit }}
       - name: Checkout CoreDNS
         uses: actions/checkout@v5
         with:
           repository: 'eli-github/coredns'
           # repository: 'coredns/coredns'
-          ref: 'v1.12.4'
+          ref: ${{ github.event.inputs.commit }}
 
       - name: Patch plugin.cfg
         run: |
@@ -68,20 +73,6 @@ jobs:
           echo "AFTER go generate"
           cat core/plugin/zplugin.go
 
-
-      # - name: Build
-      #   run: echo ${{ github.sha }} > Release.txt
-      # - name: Test
-      #   run: cat Release.txt
-      # - name: Release
-      #   uses: softprops/action-gh-release@v2
-      #   # if: github.ref_type == 'tag'
-      #   with:
-      #     name: pub Name
-      #     tag_name: "v0.0.0"
-      #     files: Release.txt
-      # - name: stop script
-      #   run: exit 1
       - name: Set up info
         run: |
           set -x -e
